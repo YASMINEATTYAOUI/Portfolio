@@ -22,3 +22,17 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Ignore all music files
+public/music/*.mp3
+public/music/*.wav
+public/music/*.ogg
+
+# Or ignore EVERYTHING in /music
+public/music/
+
+# Bonus: Ignore all large files
+*.mp3
+*.wav
+*.zip
+*.exe
