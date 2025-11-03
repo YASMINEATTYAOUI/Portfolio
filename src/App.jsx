@@ -21,7 +21,7 @@ const App = () => {
     showSoundPrompt,
     toggleAudio,
     toggleMute,
-  } = useAudio('music/bg-music.mp3');
+  } = useAudio('https://www9.ecoe.cc/get.php/1/a3/YWIhyOWxKPw.mp3?n=Power%20Focus%20-%2014Hz%20Beta%20Waves%20that%20Improve%20Concentration%20and%20Focus&uT=R&uN=Y29kZWJ1c3RlcnM%3D&h=M2d-UQVVs2PP6kXfqDdxcw&s=1762198282&uT=R&uN=Y29kZWJ1c3RlcnM%3D&s=2&v=YWIhyOWxKPw&f=mp3');
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
 

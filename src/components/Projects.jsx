@@ -74,7 +74,7 @@ const Projects = () => {
         {/* Header */}
         <div className="section-title flex items-center gap-4 mb-12">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-pink-500 to-transparent" />
-          <h2 className="text-4xl font-bold text-white">Mes Projets</h2>
+          <h2 className="text-3xl font-bold text-white">“ My Projects ”</h2>
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-pink-500 to-transparent" />
         </div>
 
@@ -103,7 +103,7 @@ const Projects = () => {
               {/* Text */}
               <div className="space-y-6 lg:order-1 order-1">
                 <div>
-                  <h3 className="text-4xl font-bold text-white mb-2">
+                  <h3 className="text-2xl font-bold text-white mb-2">
                     {currentProject.title}
                   </h3>
                   <p className="text-purple-400 text-sm mb-4">

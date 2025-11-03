@@ -6,7 +6,7 @@ const About = () => {
       <div className="max-w-4xl w-full">
         <div className="section-title flex items-center gap-4 mb-12">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
-          <h2 className="text-4xl font-bold text-white">About Me</h2>
+          <h2 className="text-3xl font-bold text-white">  “ About Me ” </h2>
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-purple-500 to-transparent" />
         </div>
 
@@ -25,7 +25,7 @@ const About = () => {
             <h3 className="text-2xl font-bold text-purple-400 mb-4">Personnalité</h3>
             <div className="flex flex-wrap gap-3">
               {['Créativité', 'Pensée critique', 'Leadership', 'Collaborative', 'Proactive'].map((trait) => (
-                <span key={trait} className="trait-badge px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full text-purple-300">
+                <span key={trait} className="trait-badge px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full text-purple-300 italic text-sm ">
                   {trait}
                 </span>
               ))}
