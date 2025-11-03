@@ -37,7 +37,7 @@ const Skills = () => {
         }
       `}</style>
 
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-gradient-to-b from-black via-purple-900/20 to-black">
+      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-gradient-to-b from-bleu via-purple-900/20 to-black">
         <div className="max-w-6xl w-full">
           {/* Section Title */}
           <div className="section-title flex items-center gap-4 mb-12">
