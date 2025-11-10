@@ -46,7 +46,7 @@ const Projects = () => {
         'Membership management',
         'Progress analytics',
       ],
-      image: 'muscle',
+      image: '/images/app-energym.png',
       color: 'from-green-500 to-teal-500',
     },
     {
@@ -61,7 +61,7 @@ const Projects = () => {
         'Parent portal',
         'Activity scheduling',
       ],
-      image: 'art',
+      image: '/images/app-kidos.png',
       color: 'from-orange-500 to-red-500',
     },
   ];

@@ -120,9 +120,19 @@ const App = () => {
         @keyframes fadeInPulse { 0%,100%{opacity:.7;transform:scale(1)} 50%{opacity:1;transform:scale(1.05)} }
         .sound-icon { animation: ripple 2s ease-out infinite; }
         @keyframes ripple {
-          0%   { box-shadow: 0 0 0 0 rgba(251,146,60,.4), 0 0 0 10px rgba(251,146,60,.4), 0 0 0 20px rgba(251,146,60,.4); }
-          100% { box-shadow: 0 0 0 10px rgba(251,146,60,.4), 0 0 0 20px rgba(251,146,60,.4), 0 0 0 40px rgba(251,146,60,0); }
-      }
+        0% {
+            box-shadow: 
+            0 0 0 0   rgba(168, 85, 247, 0.6),   /* Purple with high opacity */
+            0 0 0 10px rgba(168, 85, 247, 0.5), 
+            0 0 0 20px rgba(168, 85, 247, 0.4);
+          }
+        100% {
+            box-shadow: 
+            0 0 0 10px rgba(168, 85, 247, 0.5), 
+            0 0 0 20px rgba(168, 85, 247, 0.3), 
+            0 0 0 40px rgba(168, 85, 247, 0);
+        } 
+}
 
 .skills-video-box{
     position: absolute;
@@ -187,7 +197,7 @@ const App = () => {
       {showSoundPrompt && (
         <div className="sound-prompt fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
           <div className="text-center">
-            <div className="sound-icon relative mx-auto w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+            <div className="sound-icon relative mx-auto w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
               <svg className="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
               </svg>
