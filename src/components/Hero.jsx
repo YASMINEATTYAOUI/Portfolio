@@ -1,6 +1,9 @@
 import React from "react";
+import { useLanguage } from '../i18n';
 
 const Hero = ({ isDarkMode }) => {
+  const { t } = useLanguage();
+
   const socialLinks = [
     { name: 'GitHub', url: 'https://github.com/yassmineattyaoui', icon: (
       <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -28,13 +31,13 @@ const Hero = ({ isDarkMode }) => {
     <section className="min-h-screen flex items-center justify-center px-6">
       <div className="max-w-6xl w-full grid md:grid-cols-[1fr_1.2fr] gap-8 items-center">
         <div className={`hero-text backdrop-blur-xl p-8 rounded-3xl border shadow-2xl transition-colors duration-500 ${isDarkMode ? 'bg-gray-900/40 border-purple-500/30' : 'bg-white/60 border-gray-200'}`}>
-          <p className="text-purple-400 text-base mb-2">Bienvenu, je suis</p>
+          <p className="text-purple-400 text-base mb-2">{t.hero.greeting}</p>
           <h1 className={`text-4xl md:text-5xl font-bold mb-3 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-            Yasmine Attyaoui
+            {t.hero.name}
           </h1>
-          <p className="text-xl text-blue-400 mb-6">Full-Stack Developer</p>
+          <p className="text-xl text-blue-400 mb-6">{t.hero.role}</p>
           <p className={`text-sm mb-8 leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-            Étudiante ingénieure en informatique passionnée par le développement full-stack. Je conçois et intègre des solutions performantes avec rigueur et proactivité. Mon esprit collaboratif et innovant me permet d'optimiser chaque projet.
+            {t.hero.intro}
           </p>
           <div className="flex gap-3">
             {socialLinks.map((social) => (
@@ -57,7 +60,7 @@ const Hero = ({ isDarkMode }) => {
             <div className="absolute right-0 top-0 bottom-0 w-3/5 flex items-center justify-center">
               <div className="relative w-full h-full">
                     <img
-                      src="public/images/yas_avatar.png"
+                      src="/images/yas_avatar.png"
                       alt="Yasmine Attyaoui"
                       className="w-full h-full object-cover object-center"
                     />

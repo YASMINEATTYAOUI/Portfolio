@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useLanguage } from '../i18n';
 
 const Nav = ({
   isDarkMode,
@@ -10,31 +12,50 @@ const Nav = ({
   toggleAudio,
   toggleMute
 }) => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const { t, language, toggleLanguage } = useLanguage();
+  const navigate = useNavigate();
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
 
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (el) {
       el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      setActiveSection(id);
+    } else if (id === 'home') {
+      navigate('/', { state: { scrollTo: 'home' } });
+    } else {
+      navigate('/', { state: { scrollTo: id } });
     }
-    setActiveSection(id);
     setIsSidebarOpen(false);
   };
 
+  const LanguageToggle = ({ className = '' }) => (
+    <div className={`flex items-center rounded-lg overflow-hidden border ${className}`}>
+      {['en', 'fr'].map((code) => (
+        <button
+          key={code}
+          onClick={toggleLanguage}
+          className={`
+            px-2.5 py-1.5 text-xs font-bold uppercase transition-all duration-300
+            ${language === code
+              ? 'bg-purple-500 text-white'
+              : isDarkMode
+                ? 'text-gray-400 hover:text-white hover:bg-white/5'
+                : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'}
+          `}
+          title={code === 'en' ? 'English' : 'Français'}
+        >
+          {code}
+        </button>
+      ))}
+    </div>
+  );
+
   const navItems = [
-    { name: 'About', id: 'about' },
-    { name: 'Skills', id: 'skills' },
-    { name: 'Projects', id: 'projects' },
-    { name: 'Contact', id: 'contact' }
+    { name: t.nav.about, id: 'about' },
+    { name: t.nav.skills, id: 'skills' },
+    { name: t.nav.projects, id: 'projects' },
+    { name: t.nav.contact, id: 'contact' }
   ];
 
   return (
@@ -111,6 +132,8 @@ const Nav = ({
 
             {/* Right Side Controls */}
             <div className="flex items-center gap-2">
+              <LanguageToggle className="border-purple-500/20" />
+
               {/* Audio Controls - Desktop Only */}
               <div className="hidden md:flex items-center gap-2 mr-2">
                 <button
@@ -198,8 +221,8 @@ const Nav = ({
                       : 'text-gray-800 border-gray-300/50 hover:bg-gray-200/40 hover:border-gray-300 hover:shadow-purple-600/40'
                     }
                             `}
-                  aria-label="Download Resume" >
-                  <span>Resume</span>
+                  aria-label={t.nav.resume} >
+                  <span>{t.nav.resume}</span>
                   <i className="bi bi-arrow-right text-lg"></i>
                 </a>
               </div>
@@ -312,6 +335,8 @@ className={`
 
               {/* Audio Controls in Mobile Menu */}
 
+              <LanguageToggle className="border-purple-500/20 my-1" />
+
               <button
                 onClick={toggleAudio}
                 className={`
@@ -399,7 +424,7 @@ className={`
                   }
   `}
               >
-                <span>Resume</span>
+                <span>{t.nav.resume}</span>
                 <i className="bi bi-arrow-right text-lg"></i>
               </a>
 

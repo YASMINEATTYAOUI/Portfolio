@@ -1,6 +1,9 @@
 import React from 'react';
+import { useLanguage } from '../i18n';
 
 const Skills = () => {
+  const { t } = useLanguage();
+
   // Your 10 logo paths - update if your folder is different!
   const logos = [
     "/logos/react.png",
@@ -43,7 +46,7 @@ const Skills = () => {
           <div className="section-title flex items-center gap-4 mb-12">
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
             <h2 className="text-3xl md:text-3xl font-bold text-white text-center whitespace-nowrap">
-                 “ Skills & Technologies ”
+                 “ {t.skills.title} ”
             </h2>
             <div className="h-px flex-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent" />
           </div>
@@ -54,12 +57,12 @@ const Skills = () => {
             <div className="group bg-white/5 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-8 shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 hover:scale-[1.02] hover:border-purple-400/50">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg md:text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400">
-                  Designer
+                  {t.skills.designerTitle}
                 </h3>
                 <i className="bx bx-laptop text-lg text-gray-400 group-hover:text-purple-400 transition-all duration-300 group-hover:scale-110"></i>
               </div>
               <p className="text-gray-300 text-base leading-relaxed">
-                Passionate about crafting pixel-perfect UIs with <strong>Figma</strong>, <strong>Adobe XD</strong>, and modern CSS. I turn ideas into stunning, responsive designs.
+                {t.skills.designerText}
               </p>
             </div>
 
@@ -67,12 +70,12 @@ const Skills = () => {
             <div className="group bg-white/5 backdrop-blur-xl border border-purple-500/20 rounded-2xl p-8 shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 hover:scale-[1.02] hover:border-purple-400/50">
               <div className="flex items-center justify-between mb-6">
                 <h3 className="text-lg md:text-lg font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                  Developer
+                  {t.skills.devTitle}
                 </h3>
                 <i className="bx bx-code-block text-lg text-gray-400 group-hover:text-blue-400 transition-all duration-300 group-hover:scale-110"></i>
               </div>
               <p className="text-gray-300 text-base leading-relaxed">
-                Full-stack wizard with <strong>React</strong>, <strong>Node.js</strong>, <strong>MongoDB</strong>, and <strong>Tailwind</strong>. I build fast, scalable apps that users love.
+                {t.skills.devText}
               </p>
             </div>
           </div>

@@ -1,18 +1,19 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import PortfolioScene from './components/PortfolioScene';
 import Nav from './components/Nav';
-import Hero from './components/Hero';
-import About from './components/About';
-import Skills from './components/Skills';
-import Projects from './components/Projects';
-import ControlsPanel from './components/ControlsPanel';
+import Home from './components/Home';
+import ProjectDetail from './components/ProjectDetail';
 import { useAudio } from './hooks/useAudio';
+import { useLanguage } from './i18n';
 import './index.css';
 
 const App = () => {
-  const [activeSection, setActiveSection] = useState('home');
+  const { t } = useLanguage();
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [activeSection, setActiveSection] = useState('home');
+  const location = useLocation();
 
   const {
     audioRef,
@@ -21,59 +22,27 @@ const App = () => {
     showSoundPrompt,
     toggleAudio,
     toggleMute,
-  } = useAudio('https://www9.ecoe.cc/get.php/1/a3/YWIhyOWxKPw.mp3?n=Power%20Focus%20-%2014Hz%20Beta%20Waves%20that%20Improve%20Concentration%20and%20Focus&uT=R&uN=Y29kZWJ1c3RlcnM%3D&h=M2d-UQVVs2PP6kXfqDdxcw&s=1762198282&uT=R&uN=Y29kZWJ1c3RlcnM%3D&s=2&v=YWIhyOWxKPw&f=mp3');
+  } = useAudio();
 
   const toggleTheme = () => setIsDarkMode((prev) => !prev);
 
   // -------------------------------------------------
-  // Scroll-in animations
+  // Scroll to top when changing routes
   // -------------------------------------------------
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-in');
-          }
-        });
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
-    );
-
-    setTimeout(() => {
-      document
-        .querySelectorAll(
-          '.section-title, .skill-card, .project-card, .about-content, .trait-badge'
-        )
-        .forEach((el) => observer.observe(el));
-    }, 500);
-
-    return () => observer.disconnect();
-  }, []);
+    if (!location.state?.scrollTo) {
+      window.scrollTo(0, 0);
+    }
+  }, [location.pathname, location.state]);
 
   // -------------------------------------------------
-  // Auto-highlight active section on scroll
+  // Document title
   // -------------------------------------------------
   useEffect(() => {
-    const sections = ['home', 'about', 'skills', 'projects', 'contact'];
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveSection(entry.target.id);
-          }
-        });
-      },
-      { rootMargin: '-100px 0px -70% 0px' }
-    );
-
-    sections.forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
+    if (location.pathname === '/') {
+      document.title = 'Yasmine Attyaoui - Portfolio';
+    }
+  }, [location.pathname]);
 
   // -------------------------------------------------
   // Render
@@ -202,30 +171,13 @@ const App = () => {
                 <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
               </svg>
             </div>
-            <p className="text-white text-lg font-medium">Click to enable sounds.</p>
+            <p className="text-white text-lg font-medium">{t.sound.enable}</p>
           </div>
         </div>
       )}
 
       {/* ---------- PAGE CONTENT (scrollable, semi-transparent) ---------- */}
       <div className={`relative w-full min-h-screen overflow-x-hidden transition-colors duration-500 ${isDarkMode ? 'bg-[#0a0e1a]' : 'bg-gray-50'}`}>
-        {/* <div
-        className={`
-          relative min-h-screen overflow-x-hidden
-          transition-colors duration-500
-          ${isDarkMode ? 'bg-[#0a0e1a]/70' : 'bg-gray-50/50'}
-        `}
-      > */}
-        {/* Audio & Theme Controls */}
-        {/* <ControlsPanel
-          isDarkMode={isDarkMode}
-          isPlaying={isPlaying}
-          isMuted={isMuted}
-          toggleTheme={toggleTheme}
-          toggleAudio={toggleAudio}
-          toggleMute={toggleMute}
-        /> */}
-
         {/* Navigation */}
         <Nav
           isDarkMode={isDarkMode}
@@ -238,18 +190,19 @@ const App = () => {
           toggleMute={toggleMute}
         />
 
-        {/* Sections – must have matching IDs */}
-        <section id="home"><Hero isDarkMode={isDarkMode} /></section>
-        <section id="about"><About /></section>
-        <section id="skills"><Skills /></section>
-        <section id="projects"><Projects /></section>
-
-
-        {/* Contact Section (add your Contact component) */}
-        <section id="contact" className="py-20 text-center">
-          <h2 className="section-title text-4xl font-bold mb-8">Contact Me</h2>
-          <p className="text-lg">Your contact form or info here.</p>
-        </section>
+        {/* Routes */}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                isDarkMode={isDarkMode}
+                setActiveSection={setActiveSection}
+              />
+            }
+          />
+          <Route path="/project/:id" element={<ProjectDetail />} />
+        </Routes>
 
         {/* Footer */}
         <footer
@@ -261,7 +214,7 @@ const App = () => {
           `}
         >
           <div className="max-w-7xl mx-auto px-6 text-center">
-            <p>© 2025 Yasmine Attyaoui. All rights reserved.</p>
+            <p>© 2025 Yasmine Attyaoui. {t.footer.rights}</p>
           </div>
         </footer>
       </div>
